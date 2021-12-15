@@ -1,16 +1,17 @@
-const express = require('expreess');
+const express = require('express');
 const app = express();
 const mime = require('mime');
+const path = require('path')
 const xl = require('excel4node')
 
 const router = express.Router()
 
-const headerColumns = ["Name", "Email", "Phone"]
+const headerColumns = ["Teste", "Email", "PEDRO"]
 
 const data = [
     {name:"messi",email:"sgduyasd@giojsij", phone: "77777"},
     {name:"MESSI",email:"sgduyasd@giojsij", phone: "7777"},
-    {name:"LEEOOO",email:"sgduyasd@giojsij", phone: "77777"},
+    {name:"PEDROO",email:"sgduyasd@giojsij", phone: "6666"},
     {name:"MESSIIIII",email:"sgduyasd@giojsij", phone: "7777"}
 ]
 
@@ -31,6 +32,22 @@ const createExcelFile = () => {
     })
     wb.write("messiiiiiiii.xlsx")
 }
-createExcelFile()
+
+    router.get("/messi", (req, res, next) => {
+        createExcelFile()
+        const file = __dirname+"/messi.xlsx"
+        const fileName = path.basename(file)
+        const mimeType = mime.getType(file)
+        res.setHeader("Content-Disposition", "attachment;filename=" + fileName)
+        res.setHeader("Content-Type", mimeType)
+
+
+        setTimeout(() => {
+            res.download(file)
+        }, 2000);
+    })
 
 app.use('/', router)
+app.listen(3000, () => {
+
+})
