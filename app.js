@@ -53,7 +53,7 @@ router.get("/MessiExcel", (req, res, next) => {
 
 })
 
-/* app.use('/', router)
+app.use('/', router)
 app.listen(3000, () => {
 
-}) */
+})
